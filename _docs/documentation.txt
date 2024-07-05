@@ -1,5 +1,12 @@
 ***** DOCUMENTATION *****
 
-Names:
-	- Folders, Projects, Methods - English
-	- Variables 				 - Portuguese
+Language in project:
+	- Folders, Projects, Classes, Methods, Table 	- English
+	- Variables			 				 			- Portuguese
+	
+
+Packages:
+	- Entity Framework Core 8.0.6
+	- Identity.UI 8.0.6
+	
+	
