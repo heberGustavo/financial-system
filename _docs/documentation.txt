@@ -1,0 +1,5 @@
+***** DOCUMENTATION *****
+
+Names:
+	- Folders, Projects, Methods - English
+	- Variables 				 - Portuguese
