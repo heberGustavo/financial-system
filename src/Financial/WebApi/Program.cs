@@ -1,7 +1,10 @@
 using Entitites.Entities;
 using Helpers.DependencyGroups;
 using Infra.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using WebApi.Token;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +33,42 @@ builder.Services
 
 #region Dependency Injection
 
+ServiceDependencyInjection.Register(builder.Services);
 RepositoryDependencyInjection.Register(builder.Services);
+
+#endregion
+
+#region Authentication
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+			 .AddJwtBearer(option =>
+			 {
+				 option.TokenValidationParameters = new TokenValidationParameters
+				 {
+					 ValidateIssuer = false,
+					 ValidateAudience = false,
+					 ValidateLifetime = true,
+					 ValidateIssuerSigningKey = true,
+
+					 ValidIssuer = "Teste.Securiry.Bearer",
+					 ValidAudience = "Teste.Securiry.Bearer",
+					 IssuerSigningKey = JwtSecurityKey.Create("this is my custom Secret key for authentication")
+				 };
+
+				 option.Events = new JwtBearerEvents
+				 {
+					 OnAuthenticationFailed = context =>
+					 {
+						 Console.WriteLine("OnAuthenticationFailed: " + context.Exception.Message);
+						 return Task.CompletedTask;
+					 },
+					 OnTokenValidated = context =>
+					 {
+						 Console.WriteLine("OnTokenValidated: " + context.SecurityToken);
+						 return Task.CompletedTask;
+					 }
+				 };
+			 });
 
 #endregion
 
@@ -45,6 +83,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
