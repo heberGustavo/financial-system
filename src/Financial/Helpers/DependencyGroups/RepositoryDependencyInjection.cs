@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Helpers.DependencyGroups
 {
-	public class InfraDependencyInjection
+	public class RepositoryDependencyInjection
 	{
 		public static void Register(IServiceCollection services)
 		{

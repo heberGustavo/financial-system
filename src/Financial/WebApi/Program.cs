@@ -30,7 +30,7 @@ builder.Services
 
 #region Dependency Injection
 
-InfraDependencyInjection.Register(builder.Services);
+RepositoryDependencyInjection.Register(builder.Services);
 
 #endregion
 
