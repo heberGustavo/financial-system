@@ -27,6 +27,13 @@ namespace WebApi.Controllers
 			return await _categoryService.ListCategoryByUser(email);
 		}
 
+		[HttpGet("/api/GetAllCategories")]
+		[Produces("application/json")]
+		public async Task<IList<Category>> GetAllCategories()
+		{
+			return await _categoryService.GetAllCategories();
+		}
+
 		[HttpPost("/api/AddCategory")]
 		[Produces("application/json")]
 		public async Task<object> AddCategory(CategoryDTO category)

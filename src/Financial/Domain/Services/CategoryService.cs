@@ -15,6 +15,8 @@ namespace Domain.Services
 
 		public async Task<IList<Category>> ListCategoryByUser(string email) => await _iCategoria.ListCategoryByUser(email);
 
+		public async Task<IList<Category>> GetAllCategories() => await _iCategoria.GetAll();
+
 		public async Task AddCategory(Category category)
 		{
 			var valid = category.ValidPropertyString(category.Nome, "Nome");
