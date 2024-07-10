@@ -6,5 +6,6 @@ namespace Domain.Interfaces.IServices
 	{
 		Task AddFinancialSystem(FinancialSystem financialSystem);
 		Task UpdateFinancialSystem(FinancialSystem financialSystem);
+		Task<IList<FinancialSystem>> ListFinancialSystem(string email);
 	}
 }

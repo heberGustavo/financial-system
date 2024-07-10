@@ -41,5 +41,10 @@ namespace Domain.Services
 				await _financialSystem.Add(financialSystem);
 			}
 		}
+
+		public async Task<IList<FinancialSystem>> ListFinancialSystem(string email)
+		{
+			return await _financialSystem.ListFinancialSystem(email);
+		}
 	}
 }

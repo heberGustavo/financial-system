@@ -13,9 +13,12 @@ namespace Domain.Services
 			_financialSystem = financialSystem;
 		}
 
-		public async Task CreateUserInSystem(UserFinancialSystem userFinancialSystem)
-		{
-			await _financialSystem.Add(userFinancialSystem);
-		}
+		public async Task CreateUserInSystem(UserFinancialSystem userFinancialSystem) => await _financialSystem.Add(userFinancialSystem);
+
+		public async Task<UserFinancialSystem> GetUserByEmail(string email) => await _financialSystem.GetUserByEmail(email);
+
+		public async Task<IList<UserFinancialSystem>> ListUserSystem(int idSistema) => await _financialSystem.ListUserSystem(idSistema);
+
+		public async Task RemoveUsersSystem(List<UserFinancialSystem> users) => await _financialSystem.RemoveUsersSystem(users);
 	}
 }
