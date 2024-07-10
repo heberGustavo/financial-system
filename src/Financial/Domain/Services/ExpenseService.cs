@@ -13,6 +13,8 @@ namespace Domain.Services
 			_iExpense = iExpense;
 		}
 
+		public async Task<IList<Expense>> ListExpenseUser(string email) => await _iExpense.ListExpenseUser(email);
+
 		public async Task AddExpense(Expense expense)
 		{
 			var data = DateTime.Now;
@@ -37,5 +39,6 @@ namespace Domain.Services
 			if (valid)
 				await _iExpense.Update(expense);
 		}
+
 	}
 }
