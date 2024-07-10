@@ -13,6 +13,8 @@ namespace Domain.Services
 			_iCategoria = iCategoria;
 		}
 
+		public async Task<IList<Category>> ListCategoryByUser(string email) => await _iCategoria.ListCategoryByUser(email);
+
 		public async Task AddCategory(Category category)
 		{
 			var valid = category.ValidPropertyString(category.Nome, "Nome");
