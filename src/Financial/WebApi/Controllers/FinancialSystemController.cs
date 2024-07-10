@@ -4,6 +4,7 @@ using Entitites.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Models.DTO;
 
 namespace WebApi.Controllers
 {
@@ -28,19 +29,37 @@ namespace WebApi.Controllers
 
 		[Produces("application/json")]
 		[HttpPost("/api/AddFinancialSystem")]
-		public async Task<object> AddFinancialSystem(FinancialSystem financialSystem)
+		public async Task<object> AddFinancialSystem(FinancialSystemDTO financialSystem)
 		{
-			await _financialSystemService.AddFinancialSystem(financialSystem);
+			await _financialSystemService.AddFinancialSystem(MapperToEntity(financialSystem));
 			return Task.FromResult(financialSystem);
 		}
 
 		[Produces("application/json")]
 		[HttpPut("/api/UpdateFinancialSystem")]
-		public async Task<object> UpdateFinancialSystem(FinancialSystem financialSystem)
+		public async Task<object> UpdateFinancialSystem(FinancialSystemDTO financialSystem)
 		{
-			await _financialSystemService.UpdateFinancialSystem(financialSystem);
+			await _financialSystemService.UpdateFinancialSystem(MapperToEntity(financialSystem));
 			return Task.FromResult(financialSystem);
 		}
 
+		#region Private Methods
+
+		private FinancialSystem MapperToEntity(FinancialSystemDTO financialSystem)
+		{
+			return new FinancialSystem
+			{
+				Id = financialSystem.Id,
+				Nome = financialSystem.Nome,
+				Mes = financialSystem.Mes,
+				Ano = financialSystem.Ano,
+				DiaFechamento = financialSystem.DiaFechamento,
+				GerarCopiaDespesa = financialSystem.GerarCopiaDespesa,
+				MesCopia = financialSystem.MesCopia,
+				AnoCopia = financialSystem.AnoCopia,
+			};
+		}
+
+		#endregion
 	}
 }
